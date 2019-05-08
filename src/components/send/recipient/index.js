@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Animated } from 'react-native';
 import { translate } from 'react-i18next';
 import { IconButton } from '../../toolBox/button';
-import { P } from '../../toolBox/typography';
 import { tokenMap } from '../../../constants/tokens';
 import Input from '../../toolBox/input';
 import { colors } from '../../../constants/styleGuide';
@@ -165,10 +164,7 @@ class Recipient extends React.Component {
     } = this.props;
     const { address } = this.state;
 
-    const titles = {
-      heading: accounts.followed.length ? t('Enter an address or search in bookmarks.') : t('Enter an address to send tokens to.'),
-      inputLabel: accounts.followed.length ? t('Address or label') : t('Address'),
-    };
+    const inputLabel = accounts.followed.length ? t('Address or label') : t('Address');
 
     return (
       <View style={[styles.wrapper, styles.theme.wrapper]}>
@@ -195,11 +191,6 @@ class Recipient extends React.Component {
             type: 'inBox',
           }}
         >
-          {!isSmallScreen ? (
-            <Animated.View style={[styles.titleContainer, this.animatedStyles]}>
-              <P style={[styles.subtitle, styles.theme.subtitle]}>{titles.heading}</P>
-            </Animated.View>
-          ) : null}
 
           <View style={styles.form}>
             <View style={styles.addressContainer}>
@@ -224,7 +215,7 @@ class Recipient extends React.Component {
 
               <Input
                 reference={(input) => { this.input = input; }}
-                label={titles.inputLabel}
+                label={inputLabel}
                 autoCorrect={false}
                 onChange={this.setAddress}
                 value={address.value}
