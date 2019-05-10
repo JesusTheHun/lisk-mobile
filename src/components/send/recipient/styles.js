@@ -47,7 +47,7 @@ export default () => ({
       }),
     },
     addressInputWithAvatar: {
-      paddingLeft: 48.5,
+      paddingLeft: 40,
     },
     addressInputContainer: {
       paddingTop: 0,
@@ -63,8 +63,8 @@ export default () => ({
     avatar: {
       position: 'absolute',
       zIndex: 0,
-      left: 32.5,
-      top: 43,
+      left: 20,
+      top: 22,
     },
   },
   [themes.light]: {
