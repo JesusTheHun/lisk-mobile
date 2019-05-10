@@ -18,7 +18,9 @@ import { colors } from '../../../constants/styleGuide';
 })
 class TokenSwitcher extends React.Component {
   onClick = () => {
-    this.props.navigation.navigate('Modal', { title: 'Your assets', component: AssetSelection });
+    const { t } = this.props;
+
+    this.props.navigation.navigate('Modal', { title: t('Your tokens'), component: AssetSelection });
   }
 
   render() {
