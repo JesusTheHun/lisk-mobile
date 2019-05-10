@@ -19,7 +19,7 @@ export default () => ({
     scanButton: {
       position: 'absolute',
       zIndex: 99,
-      top: -5,
+      top: 0,
       right: boxes.boxPadding + 5,
       width: 60,
     },
@@ -72,10 +72,7 @@ export default () => ({
       backgroundColor: colors.light.white,
     },
     scanButtonTitle: {
-      color: colors.light.maastrichtBlue,
-    },
-    inputLabel: {
-      color: colors.light.maastrichtBlue,
+      color: colors.light.blue,
     },
   },
   [themes.dark]: {
@@ -83,10 +80,7 @@ export default () => ({
       backgroundColor: colors.dark.screenBgNavy,
     },
     scanButtonTitle: {
-      color: colors.light.platinum,
-    },
-    inputLabel: {
-      color: colors.light.platinum,
+      color: colors.dark.blue,
     },
   },
 });
