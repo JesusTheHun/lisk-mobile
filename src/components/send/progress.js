@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Animated } from 'react-native';
 import connect from 'redux-connect-decorator';
+import { tokenMap } from '../../constants/tokens';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+import { colors } from '../../constants/styleGuide';
 
 @connect(state => ({
   activeToken: state.settings.token.active,
@@ -10,17 +12,14 @@ import getStyles from './styles';
 class Progress extends React.Component {
   render() {
     const {
-      styles, current, total,
+      styles, current, total, activeToken,
     } = this.props;
+    const { progressRatio } = this.state;
 
-    const steps = [];
-    for (let i = 0; i < (total - 1); i++) {
-      steps.push(i + 1);
+    let color = colors.light.blue;
+    if (activeToken === tokenMap.BTC.key) {
+      color = colors.light.BTC;
     }
-
-    const deviceWidth = Dimensions.get('window').width;
-    const marginBetweenSteps = 3;
-    const stepWidth = (deviceWidth / (total - 1)) - marginBetweenSteps;
 
     return (
       <View style={[
@@ -28,20 +27,15 @@ class Progress extends React.Component {
         styles.theme.progressContainer,
         { opacity: current === total ? 0 : 1 },
       ]}>
-        {steps.map(step => (
-          <View
-            key={step}
-            style={[
-              styles.theme.progressStepContainer,
-              { width: stepWidth },
-          ]}>
-            <View style={[
-              styles.progressStep,
-              { width: step <= current ? '100%' : 0 },
-            ]} />
-          </View>
-        ))}
-
+        <Animated.View
+          style={[styles.progress, {
+            backgroundColor: color,
+            width: progressRatio.interpolate({
+              inputRange: [0, 1],
+              outputRange: ['0%', '100%'],
+            }),
+          }]}
+        />
       </View>
     );
   }
